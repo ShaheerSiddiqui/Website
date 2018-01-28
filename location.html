@@ -8,18 +8,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="location.css">
-    <style> 
-		#zombie_map {
-    		height: 50%;
-    		width: 70%; 
-		left: 15%;
-		position: absolute;
-		top:25%; 
-	}
-	</style> 
-	<!-- The style has been shown -->
-
-	<!-- This is the webpage title -->
 
 	<title>Google Maps</title> 
 
@@ -46,22 +34,18 @@
       <button class="btn btn-default navbar-btn"><a href="index.html">Logout</a></button>
   </div>
 </nav>
-	<div id="zombie_map"></div>
+	<div id="map"></div>
 	<script>
-    		var zombie_map;
+    		var map;
 		var all_markers=[];
-		var data =`43.66796473905988 -79.82670307159424 zombie.png
-		43.66701792141259 -79.8296320438385 zombie.png
-		43.66866320152215 -79.82931017875671 weapons.png
-		43.6691754021622 -79.82692837715149 weapons.png
-		43.669594472162046 -79.8283338546753 hospital.png`;
+		var data =`43.6678 -79.8266 riot.png`;
 
 		var markers = data.split("\n");
     		function initMap() {
 				
-            		zombie_map = new google.maps.Map(document.getElementById('zombie_map'), {
+            		map = new google.maps.Map(document.getElementById('map'), {
             		zoom: 15,
-            		center: {lat: 43.6678308, lng: -79.8318293}
+            		center: {lat: 43.6672, lng: -79.8212}
         		});
 			if(navigator.geolocation) {
     				navigator.geolocation.watchPosition(set_my_position);
@@ -79,18 +63,18 @@
 			var marker_position = new google.maps.LatLng(marker_data[0],marker_data[1]);
 			var marker = new google.maps.Marker({	
 				position: marker_position,
-				map: zombie_map,
+				map: map,
 				icon:emoji
 			});
 			all_markers.push(marker);
     			}
 		}
 		  function set_my_position (position){ 
-			var emoji = ("person.png");
+			var emoji = ("marker.png");
 			var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 			var marker = new google.maps.Marker({
 				position: pos,
-				map: zombie_map,
+				map: map,
 				icon: emoji
 		});
 

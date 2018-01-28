@@ -1,3 +1,11 @@
 body{
     background-color: #ddab58ff;
 }
+
+#map {
+    height: 60%;
+    width: 60%; 
+    left: 20%;
+    position: absolute;
+}
+

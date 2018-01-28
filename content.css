@@ -7,12 +7,17 @@ h3{
     font-size:300%;
 }
 
+h4{
+    font-family:"Bookman";
+    font-size:200%;
+}
+
 .what{
     font-family:"Bookman";
     font-size:120%;
 }
 
 .why{
-    margin-left: 50px;
-    margin-right: 50px;
+    font-family:"Bookman";
+    font-size:120%;
 }
