@@ -34,6 +34,17 @@
       <button class="btn btn-default navbar-btn"><a href="index.html">Logout</a></button>
   </div>
 </nav>
+    <div class="lol">
+    <img src="LoL.png" alt="League" width="100" height="100">
+    </div>
+    <div class="lol1">
+    <img  src="LoL.png" alt="league" width="100" height="100">
+    </div>
+    <center><h3>We are location where our RIOT logo is. You are where the marker is placed</h3></center>
+    <br />
+    <br />
+    <br />
+    <br />
 	<div id="map"></div>
 	<script>
     		var map;
@@ -45,7 +56,7 @@
 				
             		map = new google.maps.Map(document.getElementById('map'), {
             		zoom: 15,
-            		center: {lat: 43.6672, lng: -79.8212}
+            		center: {lat: 43.667114119397965, lng: -79.81898939527588}
         		});
 			if(navigator.geolocation) {
     				navigator.geolocation.watchPosition(set_my_position);
@@ -53,6 +64,7 @@
 			else {
     				alert("Geolocation doesn't work in your browser");
 				}
+                
 
 		for(var i=0; i < markers.length; i++){
 			var marker_data = markers[i].trim();			 
@@ -69,6 +81,26 @@
 			all_markers.push(marker);
     			}
 		}
+        var drawingManager = new google.maps.drawing.DrawingManager({
+                  drawingMode: google.maps.drawing.OverlayType.MARKER,
+                  drawingControl: true,
+                  drawingControlOptions: {
+                    position: google.maps.ControlPosition.TOP_CENTER,
+                    drawingModes:['marker', 'circle', 'polygon', 'polyline','rectangle']
+                  },
+                  markerOptions:{icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'},
+                  cicleOptions: {
+                    fillcolor:'#ffff00',
+                    fillOpacity: 1,
+                    strokeWeight: 5,
+                    clickable: false,
+                    editable: true,
+                    zIndex: 1
+                  },
+                });
+          //Will output the shapes when user intereacts with the drawing box
+                  drawingManager.setMap(map);
+        
 		  function set_my_position (position){ 
 			var emoji = ("marker.png");
 			var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
