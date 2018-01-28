@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>LoL Club</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="location.css">
+    <style> 
+		#zombie_map {
+    		height: 50%;
+    		width: 70%; 
+		left: 15%;
+		position: absolute;
+		top:25%; 
+	}
+	</style> 
+	<!-- The style has been shown -->
+
+	<!-- This is the webpage title -->
+
+	<title>Google Maps</title> 
+
+</head> <!-- The information has been shown -->
+
+<body>
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">League Club</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="content.html">Home</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">About <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="whatisleague.html">What is League of Legends?</a></li>
+          <li><a href="whatisclub.html">What is this Club for?</a></li>
+          <li><a href="whyyoujoin.html">Why should you join?</a></li>
+        </ul>
+      </li>
+            <li><a href="location.html">Location</a></li>
+      <li><a href="#">Page 3</a></li>
+    </ul>
+      <button class="btn btn-default navbar-btn"><a href="index.html">Logout</a></button>
+  </div>
+</nav>
+	<div id="zombie_map"></div>
+	<script>
+    		var zombie_map;
+		var all_markers=[];
+		var data =`43.66796473905988 -79.82670307159424 zombie.png
+		43.66701792141259 -79.8296320438385 zombie.png
+		43.66866320152215 -79.82931017875671 weapons.png
+		43.6691754021622 -79.82692837715149 weapons.png
+		43.669594472162046 -79.8283338546753 hospital.png`;
+
+		var markers = data.split("\n");
+    		function initMap() {
+				
+            		zombie_map = new google.maps.Map(document.getElementById('zombie_map'), {
+            		zoom: 15,
+            		center: {lat: 43.6678308, lng: -79.8318293}
+        		});
+			if(navigator.geolocation) {
+    				navigator.geolocation.watchPosition(set_my_position);
+				}
+			else {
+    				alert("Geolocation doesn't work in your browser");
+				}
+
+		for(var i=0; i < markers.length; i++){
+			var marker_data = markers[i].trim();			 
+			marker_data = marker_data.split(" ");
+			var latitude = marker_data[0];
+			var longitude = marker_data[1];
+			var emoji = marker_data[2] ; 
+			var marker_position = new google.maps.LatLng(marker_data[0],marker_data[1]);
+			var marker = new google.maps.Marker({	
+				position: marker_position,
+				map: zombie_map,
+				icon:emoji
+			});
+			all_markers.push(marker);
+    			}
+		}
+		  function set_my_position (position){ 
+			var emoji = ("person.png");
+			var pos = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+			var marker = new google.maps.Marker({
+				position: pos,
+				map: zombie_map,
+				icon: emoji
+		});
+
+		}
+	</script>
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUMCBGxXHfwEeI1GXGtxPCccEmFxtaUsI&callback=initMap">
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+body{
+    background-color: #ddab58ff;
+}
+
+h3{
+    font-family:"Bookman";
+    font-size:300%;
+}
+
+.what{
+    font-family:"Bookman";
+    font-size:120%;
+}
+
+.why{
+    margin-left: 50px;
+    margin-right: 50px;
+}
