@@ -6,6 +6,7 @@ body{
     height: 60%;
     width: 100%; 
     position: absolute;
+    z-index: -3
 }
 
 h4{
@@ -19,4 +20,9 @@ h4{
 
 .lol1{
     float:left;
+}
+
+.box {
+    background-color: #222222;
+    padding: 45px;
 }

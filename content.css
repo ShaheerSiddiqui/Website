@@ -34,3 +34,34 @@ h4{
     font-family:"Bookman";
     font-size:300%;
 }
+
+.requirements{
+    font-family:"Impact";
+    font-size:200%; 
+}
+
+.conditions{
+    font-family:"Palatino";
+    font-size:150%;
+
+}
+
+.box {
+    background-color: #222222;
+    padding: 45px;
+}
+
+.button1 {
+    background-color:#222222;
+    color: white;
+    border: 5px solid #3E8391;
+    height: 170px;
+    width: 250px;
+    font-family: "Impact";
+    font-size: 20px;
+}
+
+.button1:hover {
+    background-color: #fff;
+    color: white;
+}

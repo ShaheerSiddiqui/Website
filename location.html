@@ -1,7 +1,14 @@
+<!-- Created by Shaheer Siddiqui
+     Last edited on 1/28/2018
+     Teacher: Mrs. Edwards -->
+
+<!-- Start of Code -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Title of page -->
   <title>LoL Club</title>
+   <!-- Declaring all meta tags, making the page responsive using viewport, script links, and css links. Also using bootstrap-->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -9,11 +16,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="location.css">
 
-	<title>Google Maps</title> 
-
-</head> <!-- The information has been shown -->
+</head>
 
 <body>
+     <!-- This part of the code is where the navigation bar is. It is showing where each button takes you to once you click on it -->
     <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -23,16 +29,18 @@
       <li class="active"><a href="content.html">Home</a></li>
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">About <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="whatisclub.html">What is this Club for?</a></li>
+          <li><a href="whatisclub.html">Why was this club created?</a></li>
           <li><a href="whyyoujoin.html">Why should you join?</a></li>
         </ul>
       </li>
             <li><a href="location.html">Location</a></li>
-      <li><a href="#">Page 3</a></li>
+      <li><a href="register.html">Register your team!</a></li>
     </ul>
       <button class="btn btn-default navbar-btn"><a href="index.html">Logout</a></button>
   </div>
 </nav>
+    <!-- This is where the navigation bars code ends -->
+    <!-- The two pictures on the left and right -->
     <div class="lol">
     <img src="LoL.png" alt="League" width="100" height="100">
     </div>
@@ -40,11 +48,36 @@
     <img  src="LoL.png" alt="league" width="100" height="100">
     </div>
     <br />
+    <!-- Header -->
     <center><h4>We are located where our RIOT logo is. You are where the marker is placed</h4></center>
     <br />
     <br />
     <br />
+    <!-- This is right before the JS. I am calling the google maps "map" -->
 	<div id="map"></div>
+    <!-- This is the forum where the user can click on what they want and put it on the map -->
+     <center> <form>
+  <select id = "icon_to_use">
+			<option value="leaguemarker.png">League Icon</option>
+  			<option value="mouse.png">Mouse</option>
+  			<option value="keyboard.png">Keyboard</option>
+  			<option value="moniter.png">Moniter</option>
+            <option value="pc.png">PC</option>
+  </select>
+
+</form>
+</center>
+    <!-- JS begins
+         Throughout this JS, this is what everything means :
+         I declared this map.
+         I added a marker where it is set to a coordinate.
+         Function initmap is where I set the starting position of the map and the zoom.
+         Map. addlistener is where the user can use their mouse to click on a icon.
+         The if and else statement are just searching for the users location and seeing whether or not they can be found.
+         The for loop is for the markers and emojis.
+         Function set my position is the emoji which is used to show the users location
+         Function place marker are the emojis which can be used by the user for interaction. Once a marker has been placed, it will also tell the coordinates.
+         These are the comments for JS -->
 	<script>
     		var map;
 		var all_markers=[];
@@ -57,6 +90,12 @@
             		zoom: 15,
             		center: {lat: 43.667114119397965, lng: -79.81898939527588}
         		});
+                
+                map.addListener('click', function(e) {
+        var location = e.latLng;
+          place_marker(location);
+      });
+                
 			if(navigator.geolocation) {
     				navigator.geolocation.watchPosition(set_my_position);
 				}
@@ -64,7 +103,6 @@
     				alert("Geolocation doesn't work in your browser");
 				}
                 
-
 		for(var i=0; i < markers.length; i++){
 			var marker_data = markers[i].trim();			 
 			marker_data = marker_data.split(" ");
@@ -77,28 +115,10 @@
 				map: map,
 				icon:emoji
 			});
+            
 			all_markers.push(marker);
-    			}
 		}
-        var drawingManager = new google.maps.drawing.DrawingManager({
-                  drawingMode: google.maps.drawing.OverlayType.MARKER,
-                  drawingControl: true,
-                  drawingControlOptions: {
-                    position: google.maps.ControlPosition.TOP_CENTER,
-                    drawingModes:['marker', 'circle', 'polygon', 'polyline','rectangle']
-                  },
-                  markerOptions:{icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'},
-                  cicleOptions: {
-                    fillcolor:'#ffff00',
-                    fillOpacity: 1,
-                    strokeWeight: 5,
-                    clickable: false,
-                    editable: true,
-                    zIndex: 1
-                  },
-                });
-          //Will output the shapes when user intereacts with the drawing box
-                  drawingManager.setMap(map);
+            }
         
 		  function set_my_position (position){ 
 			var emoji = ("marker.png");
@@ -110,9 +130,23 @@
 		});
 
 		}
-	</script>
+        function place_marker(location){
+      var emoji = document.getElementById('icon_to_use').value;
+      var marker = new google.maps.Marker({
+
+      position: location,
+      map: map,
+      icon: emoji
+    });
+    console.log(location.lat() + "" + location.lng() + "" + emoji);
+
+    }
+
+    </script>
+<!-- The JS for the google maps api key -->
 <script async defer
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAUMCBGxXHfwEeI1GXGtxPCccEmFxtaUsI&callback=initMap">
 </script>
 </body>
 </html>
+<!-- End of location.html -->
